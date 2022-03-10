@@ -1,10 +1,12 @@
 import React from 'react';
+import CartBtn from './CartBtn';
 
 class Home extends React.Component {
   render() {
     return (
       <div>
         <input type="text" />
+        <CartBtn />
         <h1
           data-testid="home-initial-message"
         >
