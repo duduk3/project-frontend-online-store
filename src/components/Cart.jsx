@@ -17,7 +17,7 @@ class Cart extends React.Component {
 
     return (
       <div>
-        {/* <h1>carrinho de compra</h1> */}
+        <h1>carrinho de compra</h1>
         {prevStorage === null
           ? <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>
           : (
