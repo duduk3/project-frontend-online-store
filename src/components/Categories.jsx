@@ -1,5 +1,6 @@
 import React from 'react';
-import { getCategories } from '../services/api';
+import propTypes from 'prop-types';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 class Categories extends React.Component {
   constructor() {
@@ -20,6 +21,12 @@ class Categories extends React.Component {
     });
   }
 
+  hadleClick = async (categoryId) => {
+    const { getProducts } = this.props;
+    await getProductsFromCategoryAndQuery(categoryId);
+    await getProducts(categoryId);
+  }
+
   render() {
     const { categories } = this.state;
     return (
@@ -30,6 +37,7 @@ class Categories extends React.Component {
             type="button"
             data-testid="category"
             key={ category.id }
+            onClick={ () => this.hadleClick(category.id) }
           >
             {category.name}
 
@@ -40,4 +48,8 @@ class Categories extends React.Component {
     );
   }
 }
+Categories.propTypes = {
+  getProducts: propTypes.func,
+}.isRequered;
+
 export default Categories;
