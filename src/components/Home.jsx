@@ -22,7 +22,6 @@ class Home extends React.Component {
     } else {
       const product = await api.getProductsFromCategoryAndQuery(categoria, undefined);
       this.setState({ data: product.results });
-      console.log(categoria);
     }
   }
 
@@ -72,6 +71,7 @@ class Home extends React.Component {
                 title={ product.title }
                 image={ product.thumbnail }
                 price={ product.price }
+                data={ product }
               />
             ))
           }
