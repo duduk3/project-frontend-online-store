@@ -4,7 +4,6 @@ import ProductCard from './ProductCard';
 import * as api from '../services/api';
 import Categories from './Categories';
 
-
 class Home extends React.Component {
   constructor(props) {
     super(props);
