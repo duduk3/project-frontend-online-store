@@ -9,7 +9,18 @@ class Home extends React.Component {
 
     this.state = {
       textSearch: '',
+      data: [],
     };
+  }
+
+  getProducts = async () => {
+    const { textSearch } = this.state;
+    const product = await api.getProductsFromCategoryAndQuery(undefined, textSearch);
+    this.setState({ data: product.results });
+  }
+
+  handleClick = () => {
+    this.getProducts();
   }
 
   handleChange = ({ target }) => {
@@ -17,16 +28,27 @@ class Home extends React.Component {
   }
 
   render() {
-    const { textSearch } = this.state;
+    const { textSearch, data } = this.state;
+    const productsResult = [...data];
     return (
       <div>
-        <input
-          data-testid="query-input"
-          type="text"
-          name="textSearch"
-          value={ textSearch }
-          onChange={ this.handleChange }
-        />
+        <label htmlFor="search">
+
+          <input
+            data-testid="query-input"
+            type="text"
+            name="textSearch"
+            value={ textSearch }
+            onChange={ this.handleChange }
+          />
+          <button
+            data-testid="query-button"
+            type="button"
+            onClick={ this.handleClick }
+          >
+            Pesquisar
+          </button>
+        </label>
         <CartBtn />
         <h1
           data-testid="home-initial-message"
@@ -36,7 +58,16 @@ class Home extends React.Component {
         </h1>
 
         <section>
-          <ProductCard title={ textSearch } image={} price={}/>
+          {
+            productsResult.map((product) => (
+              <ProductCard
+                key={ product.id }
+                title={ product.title }
+                image={ product.thumbnail }
+                price={ product.price }
+              />
+            ))
+          }
         </section>
       </div>
     );
