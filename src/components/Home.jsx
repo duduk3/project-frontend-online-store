@@ -14,10 +14,16 @@ class Home extends React.Component {
     };
   }
 
-  getProducts = async () => {
+  getProducts = async (categoria) => {
     const { textSearch } = this.state;
-    const product = await api.getProductsFromCategoryAndQuery(undefined, textSearch);
-    this.setState({ data: product.results });
+    if (!categoria) {
+      const product = await api.getProductsFromCategoryAndQuery(undefined, textSearch);
+      this.setState({ data: product.results });
+    } else {
+      const product = await api.getProductsFromCategoryAndQuery(categoria, undefined);
+      this.setState({ data: product.results });
+      console.log(categoria);
+    }
   }
 
   handleClick = () => {
@@ -54,10 +60,10 @@ class Home extends React.Component {
         <h1
           data-testid="home-initial-message"
         >
-          Digite algum termo de pesquisa ou escolha uma categoria
+          Digite algum termo de pesquisa ou escolha uma categoria.
 
         </h1>
-
+        <Categories getProducts={ this.getProducts } />
         <section>
           {
             productsResult.map((product) => (
@@ -70,8 +76,6 @@ class Home extends React.Component {
             ))
           }
         </section>
-
-        <Categories />
       </div>
     );
   }
