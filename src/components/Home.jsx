@@ -19,7 +19,6 @@ class Home extends React.Component {
     if (!categoria) {
       const product = await api.getProductsFromCategoryAndQuery(undefined, textSearch);
       this.setState({ data: product.results });
-      console.log(product);
     } else {
       const product = await api.getProductsFromCategoryAndQuery(categoria, undefined);
       this.setState({ data: product.results });
