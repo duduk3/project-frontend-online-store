@@ -25,7 +25,7 @@ class Categories extends React.Component {
     return (
       <label htmlFor="categories">
         categorias:
-        {categories.map((category) => (
+        { categories.map((category) => (
           <button
             type="button"
             data-testid="category"
@@ -34,7 +34,7 @@ class Categories extends React.Component {
             {category.name}
 
           </button>
-        ))}
+        )) }
       </label>
 
     );
