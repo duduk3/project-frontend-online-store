@@ -9,8 +9,9 @@ class CartBtn extends React.Component {
           to="/cart"
           data-testid="shopping-cart-button"
         >
-          🛒️
-
+          <span>
+            🛒️
+          </span>
         </Link>
       </div>
     );
