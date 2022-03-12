@@ -84,6 +84,7 @@ export default class Home extends Component {
                 image={ product.thumbnail }
                 price={ product.price }
                 addToCart={ addToCart }
+                data={ product }
               />
             ))
           }

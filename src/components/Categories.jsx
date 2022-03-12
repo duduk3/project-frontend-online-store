@@ -21,7 +21,7 @@ class Categories extends React.Component {
     });
   }
 
-  hadleClick = async (categoryId) => {
+  handleClick = async (categoryId) => {
     const { getProducts } = this.props;
     await getProductsFromCategoryAndQuery(categoryId);
     await getProducts(categoryId);
@@ -37,7 +37,7 @@ class Categories extends React.Component {
             type="button"
             data-testid="category"
             key={ category.id }
-            onClick={ () => this.hadleClick(category.id) }
+            onClick={ () => this.handleClick(category.id) }
           >
             {category.name}
 
