@@ -4,6 +4,20 @@ import PropTypes from 'prop-types';
 
 class ProductCard extends React.Component {
   render() {
+    const { title, price, image, addToCart } = this.props;
+    return (
+      <div data-testid="product">
+        <h2>{title}</h2>
+        <img src={ image } alt="product" />
+        <h2>{price}</h2>
+        <button
+          type="button"
+          data-testid="product-add-to-cart"
+          onClick={ () => addToCart(this.props) }
+        >
+          Adicionar ao carrinho
+
+        </button>
     const { title, price, image, data } = this.props;
     return (
       <div data-testid="product">
@@ -30,5 +44,6 @@ ProductCard.propTypes = {
   price: PropTypes.number,
   data: PropTypes.array,
 }.isRequired;
+
 
 export default ProductCard;

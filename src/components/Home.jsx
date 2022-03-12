@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import CartBtn from './CartBtn';
 import ProductCard from './ProductCard';
 import * as api from '../services/api';
 import Categories from './Categories';
 
-class Home extends React.Component {
+export default class Home extends Component {
   constructor(props) {
     super(props);
 
@@ -33,8 +33,19 @@ class Home extends React.Component {
     this.setState({ textSearch: target.value });
   }
 
+  addToCart = async (product) => {
+    const prevStorage = JSON.parse(localStorage.getItem('cart'));
+    if (prevStorage === null) {
+      localStorage.setItem('cart', JSON.stringify([product]));
+    } else {
+      localStorage.setItem('cart', JSON.stringify([...prevStorage, product]));
+    }
+    console.log(prevStorage);
+  }
+
   render() {
     const { textSearch, data } = this.state;
+    const { handleChange, handleClick, addToCart, getProducts } = this;
     const productsResult = [...data];
     return (
       <div>
@@ -45,12 +56,12 @@ class Home extends React.Component {
             type="text"
             name="textSearch"
             value={ textSearch }
-            onChange={ this.handleChange }
+            onChange={ handleChange }
           />
           <button
             data-testid="query-button"
             type="button"
-            onClick={ this.handleClick }
+            onClick={ handleClick }
           >
             Pesquisar
           </button>
@@ -62,7 +73,8 @@ class Home extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
 
         </h1>
-        <Categories getProducts={ this.getProducts } />
+
+        <Categories getProducts={ getProducts } />
         <section>
           {
             productsResult.map((product) => (
@@ -71,6 +83,7 @@ class Home extends React.Component {
                 title={ product.title }
                 image={ product.thumbnail }
                 price={ product.price }
+                addToCart={ addToCart }
                 data={ product }
               />
             ))
@@ -80,5 +93,3 @@ class Home extends React.Component {
     );
   }
 }
-
-export default Home;
