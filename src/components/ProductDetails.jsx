@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import CartBtn from './CartBtn';
 
 class ProductDetails extends React.Component {
   addToCartDetails = async (product) => {
@@ -25,6 +26,7 @@ class ProductDetails extends React.Component {
           Adicionar ao Carrinho
 
         </button>
+        <CartBtn />
       </div>
     );
   }
