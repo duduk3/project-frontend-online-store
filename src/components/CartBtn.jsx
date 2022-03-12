@@ -7,9 +7,13 @@ export default class CartBtn extends Component {
       <div>
         <Link
           to="/shopping-cart"
+          role="img"
+          aria-label="shopping-cart"
           data-testid="shopping-cart-button"
         >
-          <span role="img" aria-label="shopping-cart">🛒️</span>
+
+          🛒️
+
         </Link>
       </div>
     );
