@@ -40,7 +40,6 @@ export default class Home extends Component {
     } else {
       localStorage.setItem('cart', JSON.stringify([...prevStorage, product]));
     }
-    console.log(prevStorage);
   }
 
   render() {
@@ -73,7 +72,6 @@ export default class Home extends Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
 
         </h1>
-
         <Categories getProducts={ getProducts } />
         <section>
           {
