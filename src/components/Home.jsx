@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import CartBtn from './CartBtn';
 import ProductCard from './ProductCard';
 import * as api from '../services/api';
 import Categories from './Categories';
 
-class Home extends React.Component {
+export default class Home extends Component {
   constructor(props) {
     super(props);
 
@@ -92,5 +92,3 @@ class Home extends React.Component {
     );
   }
 }
-
-export default Home;

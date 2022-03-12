@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class CartBtn extends React.Component {
+export default class CartBtn extends Component {
   render() {
     return (
       <div>
@@ -9,11 +9,10 @@ class CartBtn extends React.Component {
           to="/cart"
           data-testid="shopping-cart-button"
         >
-          🛒️
+          <span role="img" aria-label="'shopping-cart">🛒️</span>
 
         </Link>
       </div>
     );
   }
 }
-export default CartBtn;
