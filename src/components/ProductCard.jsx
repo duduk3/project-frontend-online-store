@@ -25,15 +25,15 @@ class ProductCard extends React.Component {
             <h2>{price}</h2>
           </div>
 
-          <button
-            type="button"
-            data-testid="product-add-to-cart"
-            onClick={ () => addToCart(this.props) }
-          >
-            Adicionar ao carrinho
-
-          </button>
         </Link>
+        <button
+          type="button"
+          data-testid="product-add-to-cart"
+          onClick={ () => addToCart(this.props) }
+        >
+          Adicionar ao carrinho
+
+        </button>
       </div>
     );
   }
