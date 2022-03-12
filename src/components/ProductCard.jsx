@@ -4,23 +4,15 @@ import PropTypes from 'prop-types';
 
 class ProductCard extends React.Component {
   render() {
-    const { title, price, image, addToCart } = this.props;
+    const { title, price, image, addToCart, data } = this.props;
     return (
       <div data-testid="product">
-        <h2>{title}</h2>
+        {/* <h2>{ title }</h2>
         <img src={ image } alt="product" />
-        <h2>{price}</h2>
-        <button
-          type="button"
-          data-testid="product-add-to-cart"
-          onClick={ () => addToCart(this.props) }
-        >
-          Adicionar ao carrinho
+        <h2>{ price }</h2> */}
 
-        </button>
-    const { title, price, image, data } = this.props;
-    return (
-      <div data-testid="product">
+        {/*
+      <div data-testid="product"> */}
         <Link
           to={ {
             pathname: '/details',
@@ -28,10 +20,19 @@ class ProductCard extends React.Component {
           } }
         >
           <div data-testid="product-detail-link">
-            <h2>{title}</h2>
+            <h2>{ title }</h2>
             <img src={ image } alt="product" />
             <h2>{price}</h2>
           </div>
+
+          <button
+            type="button"
+            data-testid="product-add-to-cart"
+            onClick={ () => addToCart(this.props) }
+          >
+            Adicionar ao carrinho
+
+          </button>
         </Link>
       </div>
     );
@@ -42,8 +43,8 @@ ProductCard.propTypes = {
   title: PropTypes.string,
   image: PropTypes.string,
   price: PropTypes.number,
+  addToCart: PropTypes.func,
   data: PropTypes.array,
 }.isRequired;
-
 
 export default ProductCard;
