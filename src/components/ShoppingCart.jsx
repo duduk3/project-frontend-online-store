@@ -2,16 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 export default class ShoppingCart extends Component {
-  // constructor() {
-  //   super();
-  // }
-
-  // getStorage = () => {
-  //   const prevStorage = JSON.parse(localStorage.getItem('cart'));
-
-  //   return prevStorage;
-  // }
-
   render() {
     const prevStorage = JSON.parse(localStorage.getItem('cart'));
     return (
