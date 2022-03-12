@@ -79,7 +79,7 @@ export default class Home extends Component {
               <ProductCard
                 key={ product.id }
                 title={ product.title }
-                image={ product.thumbnail }
+                thumbnail={ product.thumbnail }
                 price={ product.price }
                 addToCart={ addToCart }
                 data={ product }

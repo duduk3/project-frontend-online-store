@@ -18,7 +18,7 @@ export default class ShoppingCart extends Component {
                 return (
                   <div key={ product.title }>
                     <h3 data-testid="shopping-cart-product-name">{product.title}</h3>
-                    <img src={ product.image } alt={ product.title } />
+                    <img src={ product.thumbnail } alt={ product.title } />
                     <h4 data-testid="shopping-cart-product-quantity">
                       Quantidade:
                       {' '}
