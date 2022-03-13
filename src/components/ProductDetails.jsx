@@ -34,6 +34,7 @@ class ProductDetails extends React.Component {
 
 ProductDetails.propTypes = {
   title: PropTypes.string,
+  thumbnail: PropTypes.string,
 }.isRequired;
 
 export default ProductDetails;
