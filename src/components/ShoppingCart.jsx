@@ -82,6 +82,7 @@ export default class ShoppingCart extends Component {
                       Quantidade:
                     </h4>
                     <button
+                      data-testid="product-decrease-quantity"
                       type="button"
                       onClick={ () => {
                         this.subItem(product.id, product);
@@ -93,12 +94,10 @@ export default class ShoppingCart extends Component {
                     <input
                       type="text"
                       name={ product.domain_id }
-                      onChange={ ({ target }) => {
-                        (this.validate(target, quantity.length, product, prevStorage));
-                      } }
                       value={ state[product.id] }
                     />
                     <button
+                      data-testid="product-increase-quantity"
                       type="button"
                       onClick={ () => {
                         this.addItem(product.id, product);
@@ -124,6 +123,7 @@ export default class ShoppingCart extends Component {
                 );
               })) }
         <div>{ `TOTAL -------- ${total}` }</div>
+        <button type="button">Finalizar Compra</button>
       </div>
 
     );
