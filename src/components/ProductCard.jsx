@@ -26,7 +26,7 @@ class ProductCard extends React.Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ () => addToCart(this.props) }
+          onClick={ () => addToCart(data) }
         >
           Adicionar ao carrinho
 

@@ -30,8 +30,6 @@ export default class ShoppingCart extends Component {
     }
   }
 
-  validate = () => true
-
   subItem = (id, product) => {
     const { state } = this;
     const one = 1;
@@ -74,59 +72,51 @@ export default class ShoppingCart extends Component {
           ? (<h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>)
           : (
             storaged
-              .map((product) => {
-                const quantity = prevStorage.filter((i) => product.title === i.title);
-                return (
-                  <div key={ product.title }>
-                    <h3 data-testid="shopping-cart-product-name">{product.title}</h3>
-                    <img src={ product.thumbnail } alt={ product.title } />
-                    <h4 data-testid="shopping-cart-product-quantity">
-                      Quantidade:
-                    </h4>
-                    <button
-                      data-testid="product-decrease-quantity"
-                      type="button"
-                      onClick={ () => {
-                        this.subItem(product.id, product);
-                      } }
-                    >
-                      -
+              .map((product) => (
+                <div key={ product.title }>
+                  <h3 data-testid="shopping-cart-product-name">{product.title}</h3>
+                  <img src={ product.thumbnail } alt={ product.title } />
+                  <h4>
+                    Quantidade:
+                  </h4>
+                  <button
+                    data-testid="product-decrease-quantity"
+                    type="button"
+                    onClick={ () => {
+                      this.subItem(product.id, product);
+                    } }
+                  >
+                    -
 
-                    </button>
-                    <input
-                      type="text"
-                      name={ product.domain_id }
-                      onChange={ ({ target }) => {
-                        (this.validate(target, quantity.length, product));
-                      } }
-                      value={ state[product.id] }
-                    />
-                    <button
-                      data-testid="product-increase-quantity"
-                      type="button"
-                      onClick={ () => {
-                        this.addItem(product.id, product);
-                      } }
-                    >
-                      +
+                  </button>
+                  <h3 data-testid="shopping-cart-product-quantity">
+                    { state[product.id] }
+                  </h3>
+                  <button
+                    data-testid="product-increase-quantity"
+                    type="button"
+                    onClick={ () => {
+                      this.addItem(product.id, product);
+                    } }
+                  >
+                    +
 
-                    </button>
+                  </button>
+                  {' '}
+                  <button
+                    type="button"
+                    onClick={ () => this.removeItem(product, prevStorage) }
+                  >
+                    X
+
+                  </button>
+                  <h4>
+                    Preço:
                     {' '}
-                    <button
-                      type="button"
-                      onClick={ () => this.removeItem(product, prevStorage) }
-                    >
-                      X
-
-                    </button>
-                    <h4>
-                      Preço:
-                      {' '}
-                      { (product.price * state[product.id]).toFixed(2) }
-                    </h4>
-                  </div>
-                );
-              })) }
+                    { (product.price * state[product.id]).toFixed(2) }
+                  </h4>
+                </div>
+              ))) }
         <div>{ `TOTAL -------- ${total}` }</div>
         <button type="button">Finalizar Compra</button>
       </div>
