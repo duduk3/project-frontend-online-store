@@ -8,54 +8,68 @@ export default class ShoppingCart extends Component {
     this.state = {
       total: 0,
       storaged: [],
-      chaves: {},
     };
   }
 
   componentDidMount() {
     const prevStorage = JSON.parse(localStorage.getItem('cart'));
-    //* referência => https://www.youtube.com/watch?v=AiTyr_n5pws
-    const arrayIds = new Map();
-    prevStorage.forEach((elem) => {
-      const quantity = prevStorage.filter((i) => elem.title === i.title);
-      this.setState((prev) => (
-        { ...prev.chaves, chaves: { [elem.id]: quantity.length } }
-      ));
-      if (!arrayIds.has(elem.id)) {
-        arrayIds.set(elem.id, elem);
-      }
-    });
-    const novoArray = [...arrayIds.values()];
-    this.setState({ storaged: [...novoArray] });
-  }
-
-  validate = ({ value }, qtdOrigin, product) => {
-    const one = 1;
-    if (qtdOrigin < one || value < one) {
-      value = 1;
-      this.removeItem(product);
-      console.log('value:', value, '/ quantidade original:', qtdOrigin);
+    if (prevStorage) {
+      //* referência => https://www.youtube.com/watch?v=AiTyr_n5pws
+      const arrayIds = new Map();
+      prevStorage.forEach((elem) => {
+        const quantity = prevStorage.filter((i) => elem.title === i.title);
+        this.setState((
+          { [elem.id]: quantity.length }
+        ));
+        if (!arrayIds.has(elem.id)) {
+          arrayIds.set(elem.id, elem);
+        }
+      });
+      const novoArray = [...arrayIds.values()];
+      this.setState({ storaged: [...novoArray] });
+      this.getTotal();
     }
   }
 
-  subItem = (id, qtd, price) => {
-    console.log('subtrair item');
-    this.setState((prev) => ({ total: prev.total - price }));
+  // validate = ({ value }, qtdOrigin, product) => {
+  //   const one = 1;
+  //   if (qtdOrigin < one || value < one) {
+  //     value = 1;
+  //     this.removeItem(product);
+  //     console.log('value:', value, '/ quantidade original:', qtdOrigin);
+  //   }
+  // }
+
+  subItem = (id, product) => {
+    const { state } = this;
+    const one = 1;
+    this.setState((prev) => ({ [id]: prev[id] - 1 }));
+    if (state[id] <= one) {
+      this.removeItem(product);
+    }
+    this.getTotal();
   }
 
-  addItem = (id, qtd, price) => {
-    console.log('adicionar item');
-    this.setState((prev) => ({ total: prev.total + price }));
+  addItem = (id) => {
+    this.setState((prev) => ({ [id]: prev[id] + 1 }));
+    this.getTotal();
   }
 
   getTotal = () => {
-    const { total } = this.state;
-    console.log('esta retorna o total geral');
-    // if (total <= 0) {
-    //   localStorage.clear();
-    //   this.setState({ storaged: [] });
-    // }
-    return total.toFixed(2);
+    const { storaged } = this.state;
+    const { state } = this;
+    const totalOk = storaged.reduce((acc, price) => {
+      console.log(acc);
+      console.log(state[price.id]);
+      console.log(price.price);
+      // if (state[price.id]) {
+      //   const five = 5;
+      //   const prevTotal = state[price] * five;
+      //   return acc + prevTotal.toFixed(2);
+      // }
+      // return acc;
+    }, 0);
+    console.log(totalOk);
   }
 
   removeItem = (product) => {
@@ -66,20 +80,19 @@ export default class ShoppingCart extends Component {
   }
 
   render() {
-    const { storaged } = this.state;
+    const { storaged, total } = this.state;
+    const { state } = this;
     const prevStorage = JSON.parse(localStorage.getItem('cart'));
     return (
       <div>
         <Link to="/">Voltar à Home</Link>
         <h1>Carrinho de Compras</h1>
-        { prevStorage === null
-          ? <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>
+        { storaged.length === 0
+          ? (<h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>)
           : (
             storaged
               .map((product) => {
                 const quantity = prevStorage.filter((i) => product.title === i.title);
-                const { chaves } = this.state;
-                console.log(chaves);
                 return (
                   <div key={ product.title }>
                     <h3 data-testid="shopping-cart-product-name">{product.title}</h3>
@@ -90,7 +103,7 @@ export default class ShoppingCart extends Component {
                     <button
                       type="button"
                       onClick={ () => {
-                        this.subItem(product.id, quantity.length, product.price);
+                        this.subItem(product.id, product);
                       } }
                     >
                       -
@@ -102,13 +115,12 @@ export default class ShoppingCart extends Component {
                       onChange={ ({ target }) => {
                         (this.validate(target, quantity.length, product, prevStorage));
                       } }
-                      placeholder={ quantity.length }
-                      value={ chaves[product.id] }
+                      value={ state[product.id] }
                     />
                     <button
                       type="button"
                       onClick={ () => {
-                        this.addItem(product.id, quantity.length, product.price);
+                        this.addItem(product.id, product);
                       } }
                     >
                       +
@@ -125,12 +137,12 @@ export default class ShoppingCart extends Component {
                     <h4>
                       Preço:
                       {' '}
-                      { product.price * quantity.length }
+                      { product.price * state[product.id] }
                     </h4>
                   </div>
                 );
               })) }
-        <div>{ `TOTAL -------- ${this.getTotal()}` }</div>
+        <div>{ `TOTAL -------- ${total}` }</div>
       </div>
 
     );
