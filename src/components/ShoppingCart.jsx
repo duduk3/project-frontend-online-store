@@ -26,50 +26,31 @@ export default class ShoppingCart extends Component {
         }
       });
       const novoArray = [...arrayIds.values()];
-      this.setState({ storaged: [...novoArray] });
-      this.getTotal();
+      this.setState({ storaged: [...novoArray] }, () => this.getTotal());
     }
   }
-
-  // validate = ({ value }, qtdOrigin, product) => {
-  //   const one = 1;
-  //   if (qtdOrigin < one || value < one) {
-  //     value = 1;
-  //     this.removeItem(product);
-  //     console.log('value:', value, '/ quantidade original:', qtdOrigin);
-  //   }
-  // }
 
   subItem = (id, product) => {
     const { state } = this;
     const one = 1;
-    this.setState((prev) => ({ [id]: prev[id] - 1 }));
+    this.setState((prev) => ({ [id]: prev[id] - 1 }), () => this.getTotal());
     if (state[id] <= one) {
       this.removeItem(product);
     }
-    this.getTotal();
   }
 
   addItem = (id) => {
-    this.setState((prev) => ({ [id]: prev[id] + 1 }));
-    this.getTotal();
+    this.setState((prev) => ({ [id]: prev[id] + 1 }), () => this.getTotal());
   }
 
   getTotal = () => {
     const { storaged } = this.state;
     const { state } = this;
     const totalOk = storaged.reduce((acc, price) => {
-      console.log(acc);
-      console.log(state[price.id]);
-      console.log(price.price);
-      // if (state[price.id]) {
-      //   const five = 5;
-      //   const prevTotal = state[price] * five;
-      //   return acc + prevTotal.toFixed(2);
-      // }
-      // return acc;
+      const prevTotal = state[price.id] * price.price;
+      return (acc + prevTotal);
     }, 0);
-    console.log(totalOk);
+    this.setState({ total: totalOk.toFixed(2) });
   }
 
   removeItem = (product) => {
@@ -137,7 +118,7 @@ export default class ShoppingCart extends Component {
                     <h4>
                       Preço:
                       {' '}
-                      { product.price * state[product.id] }
+                      { (product.price * state[product.id]).toFixed(2) }
                     </h4>
                   </div>
                 );
