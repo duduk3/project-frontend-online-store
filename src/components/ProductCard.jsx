@@ -7,12 +7,6 @@ class ProductCard extends React.Component {
     const { title, price, thumbnail, addToCart, data } = this.props;
     return (
       <div data-testid="product">
-        {/* <h2>{ title }</h2>
-        <img src={ thumbnail } alt="product" />
-        <h2>{ price }</h2> */}
-
-        {/*
-      <div data-testid="product"> */}
         <Link
           to={ {
             pathname: '/details',
@@ -32,7 +26,7 @@ class ProductCard extends React.Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ () => addToCart(this.props) }
+          onClick={ () => addToCart(data) }
         >
           Adicionar ao carrinho
 
