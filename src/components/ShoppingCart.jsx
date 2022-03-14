@@ -30,9 +30,7 @@ export default class ShoppingCart extends Component {
     }
   }
 
-  validate = () => {
-    return true;
-  }
+  validate = () => true
 
   subItem = (id, product) => {
     const { state } = this;
