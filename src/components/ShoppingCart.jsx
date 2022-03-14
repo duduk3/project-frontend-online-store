@@ -30,6 +30,10 @@ export default class ShoppingCart extends Component {
     }
   }
 
+  validate = () => {
+    return true;
+  }
+
   subItem = (id, product) => {
     const { state } = this;
     const one = 1;
@@ -94,6 +98,9 @@ export default class ShoppingCart extends Component {
                     <input
                       type="text"
                       name={ product.domain_id }
+                      onChange={ ({ target }) => {
+                        (this.validate(target, quantity.length, product));
+                      } }
                       value={ state[product.id] }
                     />
                     <button
