@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../../services/api';
 
 class Categories extends React.Component {
   constructor() {
@@ -32,17 +32,16 @@ class Categories extends React.Component {
     return (
       <label htmlFor="categories">
         categorias:
-        { categories.map((category) => (
+        {categories.map((category) => (
           <button
             type="button"
-            data-testid="category"
-            key={ category.id }
-            onClick={ () => this.handleClick(category.id) }
+            key={category.id}
+            onClick={() => this.handleClick(category.id)}
           >
             {category.name}
 
           </button>
-        )) }
+        ))}
       </label>
 
     );

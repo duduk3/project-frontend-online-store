@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import CartBtn from './CartBtn';
-import ProductCard from './ProductCard';
-import * as api from '../services/api';
-import Categories from './Categories';
+import CartBtn from '../../components/CartBtn';
+import ProductCard from '../../components/ProductCard';
+import * as api from '../../services/api';
+import Categories from '../../components/Categories';
 
 export default class Home extends Component {
   constructor(props) {
@@ -47,42 +47,39 @@ export default class Home extends Component {
     const { handleChange, handleClick, addToCart, getProducts } = this;
     const productsResult = [...data];
     return (
-      <div>
+      <div className='container-store'>
+        <h1 className='title'>Loja de Conveniência "Online Store" </h1>
         <label htmlFor="search">
 
           <input
-            data-testid="query-input"
             type="text"
             name="textSearch"
-            value={ textSearch }
-            onChange={ handleChange }
+            value={textSearch}
+            onChange={handleChange}
           />
           <button
-            data-testid="query-button"
+            className='btn'
             type="button"
-            onClick={ handleClick }
+            onClick={handleClick}
           >
             Pesquisar
           </button>
         </label>
         <CartBtn />
-        <h1
-          data-testid="home-initial-message"
-        >
+        <h2>
           Digite algum termo de pesquisa ou escolha uma categoria.
-
-        </h1>
-        <Categories getProducts={ getProducts } />
+        </h2>
+        <Categories getProducts={getProducts} />
         <section>
           {
             productsResult.map((product) => (
               <ProductCard
-                key={ product.id }
-                title={ product.title }
-                thumbnail={ product.thumbnail }
-                price={ product.price }
-                addToCart={ addToCart }
-                data={ product }
+                key={product.id}
+                title={product.title}
+                thumbnail={product.thumbnail}
+                price={product.price}
+                addToCart={addToCart}
+                data={product}
               />
             ))
           }

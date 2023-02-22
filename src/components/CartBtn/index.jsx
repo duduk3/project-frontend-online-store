@@ -9,7 +9,6 @@ export default class CartBtn extends Component {
           to="/shopping-cart"
           role="img"
           aria-label="shopping-cart"
-          data-testid="shopping-cart-button"
         >
 
           🛒️

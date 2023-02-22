@@ -68,36 +68,34 @@ export default class ShoppingCart extends Component {
       <div>
         <Link to="/">Voltar à Home</Link>
         <h1>Carrinho de Compras</h1>
-        { storaged.length === 0
-          ? (<h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>)
+        {storaged.length === 0
+          ? (<h2>Seu carrinho está vazio</h2>)
           : (
             storaged
               .map((product) => (
-                <div key={ product.title }>
-                  <h3 data-testid="shopping-cart-product-name">{product.title}</h3>
-                  <img src={ product.thumbnail } alt={ product.title } />
+                <div key={product.title}>
+                  <h3>{product.title}</h3>
+                  <img src={product.thumbnail} alt={product.title} />
                   <h4>
                     Quantidade:
                   </h4>
                   <button
-                    data-testid="product-decrease-quantity"
                     type="button"
-                    onClick={ () => {
+                    onClick={() => {
                       this.subItem(product.id, product);
-                    } }
+                    }}
                   >
                     -
 
                   </button>
-                  <h3 data-testid="shopping-cart-product-quantity">
-                    { state[product.id] }
+                  <h3>
+                    {state[product.id]}
                   </h3>
                   <button
-                    data-testid="product-increase-quantity"
                     type="button"
-                    onClick={ () => {
+                    onClick={() => {
                       this.addItem(product.id, product);
-                    } }
+                    }}
                   >
                     +
 
@@ -105,7 +103,7 @@ export default class ShoppingCart extends Component {
                   {' '}
                   <button
                     type="button"
-                    onClick={ () => this.removeItem(product, prevStorage) }
+                    onClick={() => this.removeItem(product, prevStorage)}
                   >
                     X
 
@@ -113,11 +111,11 @@ export default class ShoppingCart extends Component {
                   <h4>
                     Preço:
                     {' '}
-                    { (product.price * state[product.id]).toFixed(2) }
+                    {(product.price * state[product.id]).toFixed(2)}
                   </h4>
                 </div>
-              ))) }
-        <div>{ `TOTAL -------- ${total}` }</div>
+              )))}
+        <div>{`TOTAL -------- ${total}`}</div>
         <button type="button">Finalizar Compra</button>
       </div>
 
