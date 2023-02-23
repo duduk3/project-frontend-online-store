@@ -1,0 +1,95 @@
+.containt-cart {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(198, 169, 132);
+    min-height: 100vh;
+    height: 100%;
+}
+
+.go-back {
+    margin: 8px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: larger;
+    color: rgb(129, 129, 255);
+    background-color: azure;
+    padding: 4px 8px;
+    max-width: 140px;
+    border-radius: 8px;
+    margin: 8px;
+}
+
+.go-back:hover {
+    margin: 8px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: larger;
+    color: rgb(82, 82, 212);
+    background-color: rgb(171, 192, 216);
+    padding: 4px 8px;
+    max-width: 140px;
+    border-radius: 8px;
+    margin: 8px;
+}
+
+.content {
+    margin: 4px 20px 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    align-self: center;
+}
+
+.qtd {
+    display: flex;
+}
+
+.less {
+    width: 32px;
+    background-color: rgb(214, 226, 222);
+    color: black;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+.more {
+    width: 32px;
+    background-color: rgb(214, 226, 222);
+    color: black;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 9px;
+}
+
+.qtd-number {
+    width: 40px;
+    background-color: rgb(72, 163, 133);
+    text-align: center;
+    border-width: 5px solid black;
+}
+
+.close {
+    background-color: rgb(10, 180, 123);
+    color: black;
+    padding: 0 8px;
+    border-radius: 4px;
+}
+
+.total {
+    align-self: center;
+    margin: 12px auto;
+}
+
+.btn-finish {
+    max-width: 30%;
+    align-self: center;
+    background-color: rgb(122, 59, 7);
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    margin: 8px 4px 30px;
+    padding: 4px 16px;
+    border-radius: 8px;
+}

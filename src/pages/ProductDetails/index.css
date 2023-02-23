@@ -1,0 +1,16 @@
+.container-product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(198, 169, 132);
+    min-height: 100vh;
+    height: 100%;
+    padding: 8px 20px;
+}
+
+img {
+    min-width: 150px;
+    width: 20%;
+    border-width: 5px solid #c47f7f;
+}

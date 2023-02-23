@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './index.css';
 
 export default class ShoppingCart extends Component {
   constructor(props) {
@@ -65,58 +66,63 @@ export default class ShoppingCart extends Component {
     const { state } = this;
     const prevStorage = JSON.parse(localStorage.getItem('cart'));
     return (
-      <div>
-        <Link to="/">Voltar à Home</Link>
+      <div className='containt-cart'>
+        <Link to="/" className='go-back'>Voltar à Home</Link>
         <h1>Carrinho de Compras</h1>
         {storaged.length === 0
           ? (<h2>Seu carrinho está vazio</h2>)
           : (
             storaged
               .map((product) => (
-                <div key={product.title}>
+                <div key={product.title} className='content'>
                   <h3>{product.title}</h3>
                   <img src={product.thumbnail} alt={product.title} />
                   <h4>
                     Quantidade:
                   </h4>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.subItem(product.id, product);
-                    }}
-                  >
-                    -
+                  <div className='qtd'>
+                    <button
+                      type="button"
+                      className='less'
+                      onClick={() => {
+                        this.subItem(product.id, product);
+                      }}
+                    >
+                      -
 
-                  </button>
-                  <h3>
-                    {state[product.id]}
-                  </h3>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.addItem(product.id, product);
-                    }}
-                  >
-                    +
+                    </button>
+                    <h3 className='qtd-number'>
+                      {state[product.id]}
+                    </h3>
+                    <button
+                      type="button"
+                      className='more'
+                      onClick={() => {
+                        this.addItem(product.id, product);
+                      }}
+                    >
+                      +
 
-                  </button>
-                  {' '}
-                  <button
-                    type="button"
-                    onClick={() => this.removeItem(product, prevStorage)}
-                  >
-                    X
-
-                  </button>
-                  <h4>
-                    Preço:
+                    </button>
                     {' '}
-                    {(product.price * state[product.id]).toFixed(2)}
-                  </h4>
+                    <button
+                      type="button"
+                      className='close'
+                      onClick={() => this.removeItem(product, prevStorage)}
+                    >
+                      X
+
+                    </button>
+                    <h4>
+                      Preço:
+                      {' '}
+                      {(product.price * state[product.id]).toFixed(2)}
+                    </h4>
+                  </div>
                 </div>
               )))}
-        <div>{`TOTAL -------- ${total}`}</div>
-        <button type="button">Finalizar Compra</button>
+        <div className='total'>{`TOTAL -------- ${total}`}</div>
+        <button className='btn-finish' type="button">Finalizar Compra</button>
       </div>
 
     );

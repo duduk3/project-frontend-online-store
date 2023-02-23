@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CartBtn from '../../components/CartBtn';
+import './index.css';
 
 class ProductDetails extends React.Component {
   addToCartDetails = async (product) => {
@@ -15,7 +16,7 @@ class ProductDetails extends React.Component {
   render() {
     const { location: { state: { dataProduct } } } = this.props;
     return (
-      <div>
+      <div className='container-product'>
         <h1>{dataProduct.title}</h1>
         <img src={dataProduct.thumbnail} alt="produto" />
         <button

@@ -3,6 +3,7 @@ import CartBtn from '../../components/CartBtn';
 import ProductCard from '../../components/ProductCard';
 import * as api from '../../services/api';
 import Categories from '../../components/Categories';
+import './index.css';
 
 export default class Home extends Component {
   constructor(props) {
@@ -48,27 +49,33 @@ export default class Home extends Component {
     const productsResult = [...data];
     return (
       <div className='container-store'>
-        <h1 className='title'>Loja de Conveniência "Online Store" </h1>
-        <label htmlFor="search">
 
-          <input
-            type="text"
-            name="textSearch"
-            value={textSearch}
-            onChange={handleChange}
-          />
-          <button
-            className='btn'
-            type="button"
-            onClick={handleClick}
-          >
-            Pesquisar
-          </button>
-        </label>
-        <CartBtn />
+        <h1 className='title'>Loja de Conveniência "Online Store" </h1>
+
+        <div className='content-store'>
+          <label className='search' htmlFor="search">
+            <input
+              type="text"
+              name="textSearch"
+              value={textSearch}
+              onChange={handleChange}
+            />
+            <button
+              className='btn'
+              type="button"
+              onClick={handleClick}
+            >
+              Pesquisar
+            </button>
+          </label>
+          <CartBtn />
+        </div>
+
+
         <h2>
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
+
         <Categories getProducts={getProducts} />
         <section>
           {
